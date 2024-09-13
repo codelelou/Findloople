@@ -33,7 +33,7 @@ Unreal Engine 5.4
 なお、このゲームのテンプレートのアップデート時に対応するUnreal Engineのバージョンが変更になることはあります。  
 
 ## Unreal Engineのインストール
-インストールについてはUnreal Engine全般のテーマのため、詳しくは[公式ドキュメント](https://www.unrealengine.com/ja/download)や解説動画などを参考にしてください。  
+インストールについてはUnreal Engine全般のテーマのため、詳しくは[Unreal Engineダウンロードページ](https://www.unrealengine.com/ja/download)や解説動画などを参考にしてください。  
 
 「Unreal Engine インストール」や「Unreal Engine 入門」などのキーワードで探してみてください。  
 このゲームのテンプレートを編集する前に、入門者向け・初心者向けの動画などでイメージを掴んだり、Unreal Engineそのものに慣れておくのも良いと思います。  
@@ -294,7 +294,7 @@ Unreal Engineに慣れるまではインポートするサウンドファイル�
 
 先程オブジェクトを追加する時に開いたメニュー内の［Quixel Bridge］からプロ仕様の3Dオブジェクトを追加しても良いでしょう（Unreal Engineのライセンスに含まれているので無料で使えますが、ハイクオリティ故に使いすぎるとゲームサイズが増えるだけでなくゲームのパフォーマンスにも影響しかねないので注意してください）。  
 もしくはUnrealマーケットプレイスからアセットを入手しても良いでしょう（このマーケットプレイスからダウンロードできるアセットには無料のものも含めゲーム素材として使ってよいライセンスが付与されています）。  
-または(RealityScan)[https://www.unrealengine.com/ja/realityscan]でスマホのカメラなどでスキャンしたものを3Dモデルとして取り込んでも良いでしょう（フリーゲームとして公開するつもりであっても漫画の違法コピーと同様にフィギュアなどの使用には著作権上の問題があるので注意してください）。  
+または[RealityScan](https://www.unrealengine.com/ja/realityscan)でスマホのカメラなどでスキャンしたものを3Dモデルとして取り込んでも良いでしょう（フリーゲームとして公開するつもりであっても漫画の違法コピーと同様にフィギュアなどの使用には著作権上の問題があるので注意してください）。  
 
 ![QuixelBridgeを開くメニューの位置の図解](https://github.com/user-attachments/assets/d08f7668-e68a-4753-8509-d82c6d89308d)
 
@@ -315,7 +315,7 @@ BGMではなく配置するオブジェクトが発する音も、3Dモデルな
 ただし、ただ配置しただけではプレイヤーキャラクターの位置に関係なく聞こえてしまうので、減衰設定を行います（立体音響となり音の位置とプレイヤーキャラクターの位置に応じて音量も変化する）。  
 
 まず配置した音声ファイルを選択し、その詳細タブの［アテニュエーション > OverrideAttenuation］を有効（チェックを入れる）にします。  
-これを有効にすると［減衰（ボリューム）］が表示されるようになるので、(公式ドキュメントのサウンドの減衰)[https://dev.epicgames.com/documentation/ja-jp/unreal-engine/sound-attenuation-in-unreal-engine]などを参考に、［減衰関数］［減衰最短距離］［フォールオフ距離］などを調整します。  
+これを有効にすると［減衰（ボリューム）］が表示されるようになるので、[公式ドキュメントのサウンドの減衰](https://dev.epicgames.com/documentation/ja-jp/unreal-engine/sound-attenuation-in-unreal-engine)などを参考に、［減衰関数］［減衰最短距離］［フォールオフ距離］などを調整します。  
 わからなければ［減衰関数］を「Natural Sound」（自然な減衰処理）にし、［減衰最短距離］と［フォールオフ距離］をそれぞれ「400」前後にすると良いでしょう。特にフォールオフ距離の初期値が大きく、ループ先でも音が聞こえてしまう恐れがあります。  
 
 ![レベル上のオーディオファイルの減衰設定個所の図解](https://github.com/user-attachments/assets/d3b956c4-2d77-4c10-b8ad-fb0550c26cde)
@@ -617,8 +617,7 @@ Windows向けのパッケージ化の準備が完了している場合、次の�
 * JumpZVelocity（ジャンプ力）
 
 ## 国際化（多言語対応）
-Unreal Engine標準のローカリゼーションダッシュボートを使ってゲーム内メニューの国際化に対応しています（エディタ上部の［ツール > ローカリゼーションダッシュボート］を左クリックして開けます）。  
-https://dev.epicgames.com/documentation/ja-jp/unreal-engine/localization-tools-in-unreal-engine?application_version=5.4  
+Unreal Engine標準の[ローカリゼーションダッシュボート](https://dev.epicgames.com/documentation/ja-jp/unreal-engine/localization-tools-in-unreal-engine?application_version=5.4)を使ってゲーム内メニューの国際化に対応しています（エディタ上部の［ツール > ローカリゼーションダッシュボート］を左クリックして開けます）。  
 
 ただ異変リストに追加した異変名や異変詳細はこのローカリゼーションダッシュボートを使って翻訳したものを追記していく必要があります。  
 
@@ -661,7 +660,7 @@ Lumenは次世代コンソールやハイエイド環境向けに設計されて
 Lumenを無効化すれば大幅に負荷を軽減できるのですが、グラフィックをかなり犠牲することになります。  
 ポストプロセスなどで対応可能のようですが、それには知識・スキルが必要になるようです。  
 
-Lumenを無効化した場合のイメージとしては、(Nintendow Switch版「8番出口」)[https://www.youtube.com/watch?v=AlGNtXqMK_c]が参考になるかもしれません。
+Lumenを無効化した場合のイメージとしては、[Nintendow Switch版「8番出口」](https://www.youtube.com/watch?v=AlGNtXqMK_c)が参考になるかもしれません。
 Switch版とPC版の「8番出口」の見た目が明らかに異なっているかと思いますが、これはLumenがそもそもSwitchに対応しておらず、Lumenが無効になっているためと思われます。
 
 一応、ゲーム内環境設定の5段階の画質設定でLumenを有効にしつつ各種パラメーターを調整して画質とパフォーマンスのバランスを図ってはいます。
@@ -696,7 +695,7 @@ Switch版とPC版の「8番出口」の見た目が明らかに異なってい�
 
 ![アンチエイリアス手法の設定個所の図解](https://github.com/user-attachments/assets/321bdaef-f181-4bf5-ad36-30999d288fa7)
 
-初期設定の「TSR」は負荷が高く「TAA」「FXAA」「None（アンチエイリアス無し）」の順に負荷が下がります（画質も下がる）。
+初期設定の「TSR」は負荷が高く「TAA」「FXAA」「None（アンチエイリアス無し）」の順に負荷が下がります（画質も下がる）。  
 ※「MSAA」はよくわかりませんでした。
 
 #### ゲーム内画質設定（上級者向け）
