@@ -70,7 +70,7 @@ GitHubページ上の緑色の［Code］ボタンを左クリックし、表示�
 初期設定は8番出口にルールに合わせているので特に変更しなくても問題はありませんが、設定値を書き換えることで変更可能です。  
 Hcbn_BP_AnomalyMasterブループリント（/Hachiban/Anomaly/Hcbn_BP_AnomalyMaster.uasset）を開き、画面中央上部のデフォルトボタンを左クリックし、右側の詳細タブの［設定］にある項目をお好みで変更してください。  
 
-![Hcbn_BP_AnomalyMasterブループリントの設定変数の場所](https://github.com/user-attachments/assets/715b8752-7a87-48de-9121-1a197a6f2fbb)
+![Hcbn_BP_AnomalyMasterブループリントの設定変数の場所](https://github.com/user-attachments/assets/0237d652-0d92-4f42-bd2d-c2b6874991a3)
 
 * AnomalyDataTable…異変リストデータテーブルファイル。
 * LastRound…クリア条件基準となるラウンド数（何番出口か）。
