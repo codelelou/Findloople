@@ -737,26 +737,6 @@ Switch版とPC版の「8番出口」の見た目が明らかに異なってい�
 
 例えばこの値を「5」に変更すると初期画質が「標準画質」になります。  
 この値は環境設定で変更されるセーブ・ロード対象の値であり、プレイヤーが変更しておりセーブ・ロードが完了していると、次回以降はプレイヤーが設定した画質で描画されます。  
-## 他システムとの統合（上級者向け）
-既にアセットや自作ゲームの共通システム（ゲーム内メニューなど）がある場合、統合しやすいようにサンプルゲームは主要箇所のみを使うことができるようになっています。  
-
-具体的には異変管理のコアである「Hachixit」ディレクトリと、異変探しゲームのコアである「Hachiban」ディレクトリです。  
-これらだけで動作させる場合はGameModeを「Hcbn_BP_GameMode」にし、GameInstanceを「Hcbn_BP_GameInstance_Anomaly」に変更することで動作確認が可能です。  
-
-この場合はサンプルのゲーム内メニューを使わなくなります。そのためギャラリー設定もできなくなり、画質やマウス感度の設定などもできなくなります。  
-あわせて進行状況のセーブ・ロードもされなくなるため、必要ならセーブ・ロードの実装が必要になります。  
-
-なお「Hachiban_Advance」ディレクトリはゲーム開発の入門・初心者用にゲーム内メニューなど追加したものになっています。  
-ただしプログラム自体は複雑なためカスタマイズは上級者向けとなっています。  
-
-そして「Lelool」ディレクトリは別ゲームなどでも使うための共通システムで、「Hachiban_Advance」ディレクトリは「Lelool」ディレクトリに依存しています。  
-
-また各ディレクトリのファイルは、基本的にディレクトリ毎に共通したプレフィックスがついています。  
-
-* Hachixit（依存なし） = Hcxt_
-* Hachiban（「Hachixit」に依存） = Hcbn_
-* Hachiban_Advance（「Hachiban」と「Lelool」に依存） = Hcbn_Advance_
-* Lelool（依存なし） = Lelool_
 
 ## フォント
 Unreal Engine標準のフォントは日本語対応にはなっていますが、日本人からすると不自然に感じるものが一部あります。  
@@ -791,6 +771,78 @@ Unreal Engine標準のフォントは日本語対応にはなっていますが�
 
 ルール変更はHcbn_BP_LevelHelper_MainStageの変更で実現できるとは思いますが、複雑かつその変更内容に不具合があるとゲーム進行に影響があるのでかなり上級者向けかもしれません。  
 そして上級者であっても、複雑なシステムの仕様変更は高難易度かつハイリスクです。このゲームのテンプレートを作った本人ですら仕様変更は気軽にできないものです。  
+
+## 別プロジェクトに移行する（上級者向け）
+このゲームのテンプレートを別のUnrealプロジェクトファイルに移行し、移行先で実行する手順を説明します。  
+
+移行には大きく2パターンあります。  
+1つは異変管理基本プログラム一式とサンプル一式（ゲーム内メニューとセーブ・ロード処理を除く）のみの移行。  
+もう1つはこのゲームのテンプレートの全ての移行。  
+
+参考までに各ディレクトリの依存関係と、ディレクトリ別のプレフィックスは次の通りです。  
+* Hachixit（依存なし） = Hcxt_
+* Hachiban（「Hachixit」に依存） = Hcbn_
+* Hachiban_Advance（「Hachiban」と「Lelool」に依存） = Hcbn_Advance_
+* Lelool（依存なし） = Lelool_
+
+### 異変管理基本プログラム一式とサンプル一式（ゲーム内メニューとセーブ・ロード処理除く）のみ使用する移行方法
+この移行方法ではゲーム内メニューが表示されず、かつ環境設定内容だけでなくゲームの進行のセーブ・ロードも行われません。
+上級者が別システムと統合するような場合の移行方法になるかと思います。  
+
+まずは移行先のプロジェクトで次のプラグインが有効になっていない場合は有効にします（設定変更後はエディタの再起動が必要）。  
+* Text 3D
+
+次のディレクトリが移行に必要となります。  
+* Hachixit（異変管理の基本プログラム一式）
+* Hachiban（ゲーム内メニューとセーブ・ロード処理を除くサンプル一式）
+
+ファイルの移行が成功したら［プロジェクト設定 > プロジェクト > マップ&モード］の設定を行います。  
+［デフォルトのゲームモード］にHcbn_BP_GameMode（/Hachiban/Blueprint/GameMode/Hcbn_BP_GameMode.uasset）を設定します。  
+［ゲームのデフォルトマップ］にHcbn_Level_Top（/Hachiban/Level/Hcbn_Level_Top.umapを設定します。  
+「ゲームインスタンス」にHcbn_BP_GameInstance_Anomaly（/Hachiban/Blueprint/GameInstance/Hcbn_BP_GameInstance_Anomaly.uasset）を設定します。  
+
+移行先のプロジェクト自体にエラーが発生していなければ、移行先でこのゲームのテンプレートが動作するようになると思います（ゲーム内メニューとセーブ・ロード処理はありません）。
+
+### 全てを使用する移行方法
+まずは移行先のプロジェクトで次のプラグインが有効になっていない場合は有効にします（設定変更後はエディタの再起動が必要）。  
+* Text 3D
+* Common UI Plugin
+
+次のディレクトリが移行に必要となります。  
+* Hachixit（異変管理の基本プログラム一式）
+* Hachiban（ゲーム内メニューとセーブ・ロード処理を除くサンプル一式）
+* Hachiban_Advance（ゲーム内メニューとセーブ・ロード処理一式）
+* Lelool（Hachiban_Advanceが使用するライブラリ一式）
+
+ファイルの移行が成功したら［プロジェクト設定 > プロジェクト > マップ&モード］の設定を行います。  
+［デフォルトのゲームモード］にHcbn_Advance_BP_GameMode（/Hachiban_Advance/Blueprint/GameMode/Hcbn_Advance_BP_GameMode.uasset）を設定します。  
+［ゲームのデフォルトマップ］にHcbn_Level_Top（/Hachiban/Level/Hcbn_Level_Top.umapを設定します。  
+「ゲームインスタンス」にHcbn_Advance_BP_GameInstance（/Hachiban_Advance/Blueprint/GameInstance/Hcbn_Advance_BP_GameInstance.uasset）を設定します。  
+
+移行先のプロジェクト自体にエラーが発生していなければ、移行先でこのゲームのテンプレートが動作するようになると思います（ゲーム内メニューを使用するにはCommon UI Pluginの設定も行う必要があります）。
+
+#### Common UI Pluginの設定
+ゲーム内メニューのゲームパッド・キーボード＆マウスのボタン・キー表記やそのショートカットキー操作に対応するための設定が必要です。  
+もし移行先のプロジェクトで既に設定された場合は調整が必要になるかもしれません。  
+
+［プロジェクト設定 > ゲーム > Common Input Settings］を開きます。  
+［インプットデータ］にHcbn_Advance_CommonUIInputData（/Hachiban_Advance/UI/Hcbn_Advance_CommonUIInputData.uasset）を設定します。  
+［プラットフォーム入力 > Windows > Default］の［デフォルトの入力タイプ］を［Gamepad］に設定し、［デフォルトのゲームパッド名］に［Generic］を設定、コントローラーデータには次の2つを設定します。  
+* Lelool_CommonUI_CommonInputBaseControllerData_Gamepad（/Lelool/UI/Lelool_CommonUI_CommonInputBaseControllerData_Gamepad.uasset）
+* Lelool_CommonUI_CommonInputBaseControllerData_MouseAndKeyboard（/Lelool/UI/Lelool_CommonUI_CommonInputBaseControllerData_MouseAndKeyboard.uasset）
+
+最後に［プロジェクト設定 > エンジン > 基本設定 > ゲームのビューポートクライアントクラス］に［CommonGameViewportClient］を設定します（設定を変更した場合はエディタの再起動を求められると思うので、その場合は指示に従って再起動してください）。
+
+これらの設定により、ゲーム内メニューにゲームパッドとキーボード&マウスのショートカットキーの表示と、ショートカット操作が行えるようになるかと思います。
+
+##### 移行時の不具合
+現在、移行時の不具合としてゲーム内メニューの一部が正常に表示されない現象を確認しております。  
+* 異変一覧
+* インフォメーション
+* 環境設定
+
+ゲーム内メニューは不具合の原因はわかっておらず、Common UI Pluginがまだベータ版であることが原因の可能性も考えられます。  
+通常はリスクのある対応方法ではあるのですが、エディタの移行機能を使わずゲーム内メニューのファイル一式（/Content/Hachiban_Advance/UI）を直接コピーして上書きすることで正常に動作することは確認できました。  
 
 # ゲーム作成・異変作成時の注意点
 
