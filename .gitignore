@@ -2230,3 +2230,5 @@ Intermediate/Build/SourceFileCache.bin
 Intermediate/Build/BuildRules/FindloopleModuleRulesManifest.json
 Intermediate/Build/BuildRules/FindloopleModuleRules.pdb
 Intermediate/Build/BuildRules/FindloopleModuleRules.dll
+*.log
+/Saved
