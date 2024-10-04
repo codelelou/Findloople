@@ -598,7 +598,7 @@ Windows向けのパッケージ化の準備が完了している場合、次の�
 
 ## エディタ上で旧プロジェクトから移行するファイル
 次のファイルを移行します。  
-* フラフリスト…/Content/Osagashi/Findloople/Osgs_DataTable_Flags.uasset
+* フラグリスト…/Content/Osagashi/Findloople/Osgs_DataTable_Flags.uasset
 * トップレベル…/Content/Osagashi/Level/Osgs_Level_Top.umap
 * メインステージレベル…/Content/Osagashi/Level/Osgs_Level_MainStage.umap
 
