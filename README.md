@@ -936,6 +936,82 @@ Unreal Engine標準のフォントは日本語対応にはなっていますが�
 
 この罠を常時移動させたり細い道の下に広げたりすればアクション要素を追加できますし、プレイヤーを襲うキャラクターに付けるといった使い方もできます。  
 
+## キャラクターにUE標準のThirdPersonを使用する  
+デフォルトではプレイヤーが操作するキャラクターはOsgs_BP_Character（/Osagashi/Blueprint/Character/Osgs_BP_Character.uasset）となっています。  
+一人称視点のカメラがあるだけの、体を持たないシンプルなキャラクターです。  
+
+この使用するキャラクターはGameModeのOsgs_Advance_BP_GameMode（/Osagashi_Advance/Blueprint/GameMode/Osgs_Advance_BP_GameMode.uasset）の「Default Pawn Class」で指定しています。  
+Unreal Engineでは基本的にこのGameModeで使用するキャラクターやコントローラーなどの設定を行います。  
+
+参考として、[Unreal Engine標準で用意されている三人称視点のThirdPersonキャラクター](https://dev.epicgames.com/documentation/ja-jp/unreal-engine/third-person-template-in-unreal-engine)を使用する方法を説明します。  
+このThirdPersonキャラクターをベースに、アセットストアで入手したキャラクターなどを使用する方法や、足音（Footstep）などを追加する方法が紹介・解説されていることが多いので、それらを参考にカスタマイズする時に便利かと思います。  
+
+Unrealエディタ左下の［コンテンツドロワー］ボタンを左クリックしてコンテンツブラウザを開き、コンテンツブラウザ左上の［追加］ボタンを左クリックしてメニューを開き、［コンテンツを取得 > 機能またはコンテンツパックを追加…］を左クリックします。  
+「プロジェクトをコンテンツに追加」ウィンドウが開くので、「ブループリント」の「サードパーソン」を左クリックして選択し、そのウィンドウ右下の［プロジェクトの追加］ボタンを左クリックします。  
+
+![ThirdPersonを追加する手順の図解](https://github.com/user-attachments/assets/6974bf04-f25c-47ce-ba1b-efd94cb8dd6a)
+
+もし「機能またはコンテンツパックを追加…」の項目が無いようであれば、Epic Games Launcherで使用しているUnreal Engineバージョンのオプションから「スターターコンテンツ」をインストールする必要があるかと思います。  
+
+![EpicGamesLauncherからスターターコンテンツをインストールする手順の図解](https://github.com/user-attachments/assets/c28ebe69-59ac-4039-b260-629a45c3e910)
+
+追加が成功していれば、コンテンツフォルダ直下に「ThirdPerson」フォルダが追加されます。  
+
+![ThirdPerson追加成功時の図解](https://github.com/user-attachments/assets/cdbaec20-f987-46b1-96e2-cda992a1d896)
+
+### ThirdPersonをベースのキャラクターに修正する  
+ThirdPersonキャラクターは名前の通り三人称視点ですし、ThirdPersonキャラクター自体にキャラクターの操作・動作の処理が実装されているなど、そのまま使用してしまうと操作性や見た目に不都合が生じるかと思います。  
+そのため、まずはデフォルトのキャラクターであるOsgs_BP_CharacterをThirdPersonキャラクターをベースに修正します。  
+
+Osgs_BP_Character（/Osagashi/Blueprint/Character/Osgs_BP_Character.uasset）を開き、Unrealエディタ上部中央あたりの［クラス設定］ボタンを左クリックします。  
+そして右側に表示される［詳細］タブの［クラスオプション > 親クラス］を「Character」から「BP_ThirdPersonCharacter」に変更します。  
+
+![Osgs_BP_Characterの親クラスを変更する手順の図解](https://github.com/user-attachments/assets/51cba67a-52f5-4457-9ba6-06d31642d264)
+
+多少オブジェクト指向プログラム的な解説になりますが、「BP_ThirdPersonCharacter」も「Character」の子クラスなのですが、この修正により「Osgs_BP_Character」は「Character」の子クラス「BP_ThirdPersonCharacter」の子クラスになります。  
+「継承」といって、こうすることで子クラスは親クラスの実装（プログラム）をコピペすることなく、親クラスの実装を持つことができます。さらに必要に応じて、「オーバーライド」といって親クラスの処理の前後に処理を追加したり、親クラスの処理を無効化したり（実行しない）できます。  
+
+試しにこの状態でエディタ上でゲームをプレイすると、カメラが三人称視点になり、かつプレイヤーの体も見えるかと思います。  
+
+#### ThirdPersonを修正する
+ThirdPersonキャラクターにはキャラクターの操作処理が実装されているため、キャラクターの操作処理が重複するなど不都合があるため、この実装を削除します。  
+
+BP_ThirdPersonCharacter（/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset）を開き、［イベントグラフ］タブを左クリックします。  
+このイベントグラフに入力設定（Enhanced Input）やカメラ・移動・ジャンプの処理が実装されているため、それらをすべて選択し、キーボードの［delete］キーで削除します。  
+イベントグラフはマウスのスクロールキーなどで拡大縮小できるかと思います。  
+
+![BP_ThirdPersonCharacterの削除する実装の図解](https://github.com/user-attachments/assets/3fb060f4-1027-4078-9b46-4930becd4d47)
+
+#### Osgs_BP_Characterを修正する  
+BP_ThirdPersonCharacterの子クラスの場合、必要に応じて一人称視点（主観視点）と体の非表示の修正を行います。  
+
+この修正により、基本的にBP_ThirdPersonCharacterの子クラスに変更したことによる変化はなくなるかと思います。  
+そして必要に応じてアセットストアで入手したキャラクターに差し替えたり、足音を追加するなどのカスタマイズに挑戦していただければと思います。  
+
+Osgs_BP_Character（/Osagashi/Blueprint/Character/Osgs_BP_Character.uasset）を開きます。  
+
+##### 三人称視点から一人称視点に修正する  
+BP_ThirdPersonCharacterの子クラスになるとキャラクターには三人称視点カメラと一人称視点カメラの2つを持った状態となるので、三人称視点カメラを無効化する必要があります。  
+
+Unrealエディタ左上のあたりの［コンポーネント］タブ内の「FollowCamera」を左クリックして選択し、Unrealエディタ右側に表示される［詳細］タブの［アクティベーション > Auto Activate］を無効化（チェック無しの「False」）します。  
+
+![Osgs_BP_Characterの一人称視点カメラを無効化する手順の図解](https://github.com/user-attachments/assets/0f5c1e9d-924a-49d3-a13c-39801c708844)
+
+#### 体を非表示にする  
+キャラクターの体が表示状態で一人称視点にすると体がカメラに貫通して不都合が生じます（Unrealエディタ上でプレイすればわかるかと思います）。  
+
+Unrealエディタ左上のあたりの［コンポーネント］タブ内の「Mesh (CharacterMesh0)」を左クリックして選択し、Unrealエディタ右側に表示される［詳細］タブの［レンダリング > Visible］を無効化（チェック無しの「False」）します。  
+
+![Osgs_BP_Characterの体を非表示にする手順の図解](https://github.com/user-attachments/assets/eaf336b3-2a3e-4c00-b0c4-5a12507b7f05)
+
+なお一人称視点用のカメラをこのMeshの子どもとして配置し、親ソケットを「head」などに設定して位置を調整することで体を表示したまま一人称視点を実現できなくもありません。  
+ただし、この場合はカメラの位置が頭の手前に位置することになるため、壁やドアに近づいたような時にカメラがそれらを貫通してその先が見えてしまう不都合が発生することもあり、それらの調整が必要になり簡単ではありません。  
+さらにカメラを頭の位置と連動させることでカメラの揺れが発生し、プレイヤーのカメラ酔いを引き起こしやすくなります（一人称視点のゲームにおいてカメラ揺れを無効化オプションの要望は多いと感じます）。
+
+他にも顔・頭部のみ非表示する方法もありますが、この場合は首から体の内部が見えてしまうことがあります。  
+
+色々なゲームや配信者のゲーム実況をチェックする限り、カメラの視点を真下に向けることは比較的稀なので、特に理由がなければプレイヤーの体が非表示するのがベターではないかと思います。  
+
 ## 別プロジェクトに移行する（上級者向け）
 このゲームのテンプレートを別のUnrealプロジェクトファイルに移行し、移行先で実行する手順を説明します。  
 
