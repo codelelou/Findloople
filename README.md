@@ -10,6 +10,8 @@
 まずはシティシム感覚で、お探しゲームの舞台となるレベル（地形や建物）を3Dモデルなどを配置して作成します（無料の3Dモデルでも高品質なものが多数あります、スマホでスキャンしたものを3Dモデル化することも可能です）。  
 レベル作成が終わればゲームの大半が完成したようなもので、後はフラグリストを作成し、レベルに配置したオブジェクトにフラグを設定するだけです。  
 
+なお、8番ライクゲームを作る場合は「[8番ライクの作り方](#8番ライクの作り方)」も参考にしてください（実は8番ライクゲームの方がサンプルゲームの写真撮影がないため作るのが楽です）。  
+
 # デモゲーム
 実際に作れるゲームをイメージしやすいようにデモゲームを用意しています。  
 * [ネコ探しゲーム](https://codelelou.itch.io/find-cat)（ネコのキャラクター以外は無料アセットのみ使用）
@@ -681,7 +683,7 @@ Unreal Engine標準の[ローカリゼーションダッシュボート](https:/
 * Mode=Standard（失敗時0に戻る）  
 
 ### 写真撮影機能を無効化
-Osgs_BP_GameModeブループリント（Content/Osagashi/Blueprint/GameMode/Osgs_BP_GameMode.uasset）を開きます。  
+Osgs_Advance_BP_GameModeブループリント（/Content/Osagashi_Advance/Blueprint/GameMode/Osgs_Advance_BP_GameMode.uasset）を開きます。  
 そして左側の［コンポーネント］タブ内の［AnswerComponent］を選択し、右側に表示される［詳細］タブの［デフォルト > UserWidgetClass］を［None］にします（バツボタンを左クリックしてクリアすると簡単です）。  
 
 ![Osgs_BP_GameModeのAnswerComponentの編集箇所の図解](https://github.com/user-attachments/assets/3ca70012-e149-403a-aadd-7fd02caa0f3d)
