@@ -755,6 +755,28 @@ Osgs_Advance_BP_GameModeブループリント（/Content/Osagashi_Advance/Bluepr
 
 ただしギャラリー機能は開発中のフラグのテストで便利なので、せめて開発中は表示する方が良いでしょう（その場合はリリース時に消し忘れないように注意しましょう）。  
 
+### モード・ギャラリー設定を進行状況で制限する  
+「モード」と「ギャラリー設定」はクリア済みやフラグ（異変）全回収済みかで制限することができます。  
+
+デフォルトではどちらも制限を設けていませんが、制限を設ける場合は必要に応じて各項目右側のテキストやストアページなどでクリア後や全回収後にオプション解放があるなどの説明を行うことを検討してください（例：「クリア後開放」「全異変発見後に使用可能」）。  
+特に「ギャラリー設定」は制限中だと項目自体が選択できないため、プレイヤーが不具合と勘違いする可能性などが考えられます。  
+
+#### モード設定で「フラグ（異変）回収モード」を制限する  
+制限を設ける場合はOsgs_Advance_WBP_Pause_Contentウィジットの「デザイナー」で「ModeComboBox」を選択し、「詳細」タブの「デフォルト」項目の「Is Easiest Disabled if Not Cleared」（一度クリアするまで回収モードを非表示にする）や「Is Easiest Disabled if Not Flag Completed」（フラグを全回収するまで回収モードを非表示にする）にチェックを入れます。  
+両方にチェックを入れた場合は両方の条件を満たさないと制限は解除されません。  
+![モード設定で「フラグ（異変）回収モード」を制限する方法の図解](https://github.com/user-attachments/assets/3d481d3b-d88d-4009-bd8c-1edf187cad29)
+
+もしフラグ（異変）の発見数や発見率で制限したい場合は、若干のプログラミングは必要になりますが、制限の有無の判定処理内（Osgs_Advance_WBP_Flag_Mode_ComboBoxウィジェットブループリントのIsEasiestAvailable関数）にそのためのサンプルプログラムを残しているので参考にしてみてください（このサンプル画像ではIsEasiestAvailabe関数の基点から直接カスタマイズサンプル用のSequenceノードに直接繋ぎ、クリア済みかやフラグ全回収済みかはチェックしなくなります）。  
+![モード設定でフラグの発見数・率で制限する場合のサンプルプログラム](https://github.com/user-attachments/assets/a3e2a7f1-72d9-45f1-aa1e-230dc097f0fa)
+
+#### ギャラリー設定を制限する  
+制限を掛ける場合はOsgs_Advance_WBP_Pause_Contentウィジットの「デザイナー」で「NextFlagComboBox」を選択し、「詳細」タブの「デフォルト」項目の「Is Disabled if Not Cleared」（一度クリアするまで項目自体を無効にする）や「Is Disabled if Not Flag Completed」（フラグを全回収するまで項目自体を無効にする）にチェックを入れます。  
+両方にチェックを入れた場合は両方の条件を満たさないと制限は解除されません。  
+![ギャラリー設定を制限する方法の図解](https://github.com/user-attachments/assets/86595a0a-1ab2-434b-8fa5-29b7e67ea81c)
+
+もしフラグ（異変）の発見数や発見率で制限したい場合は、若干のプログラミングは必要になりますが、制限の有無の判定処理内（Osgs_Advance_WBP_Flag_Next_ComboBoxウィジェットブループリントのIsEasiestAvailable関数）にそのためのサンプルプログラムを残しているので参考にしてみてください（このサンプル画像ではIsAvailabe関数の基点から直接カスタマイズサンプル用のSequenceノードに直接繋ぎ、クリア済みかやフラグ全回収済みかはチェックしなくなります）。  
+![モード設定でフラグの発見数・率で制限する場合のサンプルプログラム](https://github.com/user-attachments/assets/b54d3ad5-d553-437f-8daf-7614443c9a02)
+
 ## 操作方法のキー設定
 キャラクターの操作やメニュー表示などのキーはそれぞれ設定ファイルが分かれています（詳しくは[Unreal EngineのEnhanced Input](https://dev.epicgames.com/documentation/ja-jp/unreal-engine/enhanced-input-in-unreal-engine)などを参照してください）。  
 
