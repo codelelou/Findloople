@@ -1032,7 +1032,7 @@ Unrealエディタ左下の［コンテンツドロワー］ボタンを左ク�
 
 ![ThirdPersonを追加する手順の図解](https://github.com/user-attachments/assets/6974bf04-f25c-47ce-ba1b-efd94cb8dd6a)
 
-もし「機能またはコンテンツパックを追加…」の項目が無いようであれば、Epic Games Launcherで使用しているUnreal Engineバージョンのオプションから「スターターコンテンツ」をインストールする必要があるかと思います。  
+もし「機能またはコンテンツパックを追加…」の項目が無いようであれば、Epic Games Launcherで使用しているUnreal Engineバージョンのオプションから「スターター コンテンツ」か「テンプレートとおすすめパック」をインストールする必要があるかと思います。  
 
 ![EpicGamesLauncherからスターターコンテンツをインストールする手順の図解](https://github.com/user-attachments/assets/c28ebe69-59ac-4039-b260-629a45c3e910)
 
