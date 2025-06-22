@@ -22,6 +22,14 @@
 
 ---
 
+# Unreal Engine 5.4/5.5での開発について
+Findloople ver.01.01.00でUnreal Engineの対応バージョンを「5.6」に変更したため、Unreal Engine 5.4/5.5のサポートは[Findloople ver.01.00.13](https://github.com/codelelou/Findloople/releases/tag/v.1.0.13)までとなります。  
+
+Unreal Engine 5.6.0でのText3Dプラグインの仕様変更に対応するためで、Unreal Engine 5.4/5.5で開発しているプロジェクトのUnreal Engine 5.6以降へのアップデートは原則できません。  
+上級者向けですが、Text3Dプラグインを無効化することでアップデート自体は技術的に可能ではあります（リスクとコストを覚悟する必要があります）。  
+
+---
+
 # 目次
 * [導入（開発環境構築）](#導入開発環境構築)
 * [お探しループゲームの作り方](#お探しループゲームの作り方)
@@ -68,15 +76,15 @@
 ---
 
 # 導入（開発環境構築）
-このゲームのテンプレートはゲームエンジンのUnreal Engineのプロジェクトファイルのため、Unreal Engineをインストールする必要があります。  
+このゲームテンプレートはゲームエンジンのUnreal Engineのプロジェクトファイルのため、Unreal Engineをインストールする必要があります。  
 
 ## Unreal Engineのバージョン
-Unreal Engine 5.4  
+Unreal Engine 5.6  
 
 このバージョン以降のもであれば動作する可能性は高いですが、Unreal Engineのアップデートによっては下位互換がなくなりそのままでは正常に動作しなくなることはあります。  
 この場合はこのゲームのテンプレートの対応バージョンのUnreal Engineをインストールしてください（1つの端末に異なる複数のバージョンのUnreal Engineのインストールは可能です）。  
 
-なお、このゲームのテンプレートのアップデート時に対応するUnreal Engineのバージョンが変更になることもあります。  
+なお、このゲームテンプレートのアップデート時に対応するUnreal Engineのバージョンが変更になることもあります。  
 
 ## Unreal Engineのインストール
 インストールについてはUnreal Engine全般のテーマのため、詳しくは[Unreal Engineダウンロードページ](https://www.unrealengine.com/ja/download)や解説動画などを参考にしてください。  
